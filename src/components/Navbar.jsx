@@ -55,7 +55,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'glass-panel py-3 shadow-lg' : 'bg-transparent py-5'}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled || mobileMenuOpen ? 'bg-bg-darker/95 backdrop-blur-2xl border-b border-gray-800 py-3 shadow-lg' : 'bg-transparent py-5'}`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <a href="#home" onClick={(e) => handleScrollToSection(e, '#home')} className="text-2xl font-bold tracking-tighter text-white">
           <span className="text-brand-blue">MB</span>.DEV
@@ -103,7 +103,7 @@ const Navbar = () => {
 
       {/* Mobile Nav */}
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 glass-panel border-t-0 p-4 flex flex-col gap-4">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-bg-darker/95 backdrop-blur-2xl border-b border-gray-800 shadow-2xl p-4 flex flex-col gap-4">
           {navLinks.map((link) => (
             <a 
               key={link.name} 

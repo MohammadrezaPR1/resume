@@ -54,7 +54,7 @@ const NavbarFa = () => {
   };
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'glass-panel py-4 shadow-lg' : 'bg-transparent py-6'}`}>
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled || isMobileMenuOpen ? 'bg-bg-darker/95 backdrop-blur-2xl border-b border-gray-800 py-4 shadow-lg' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <a href="#home" onClick={(e) => handleScrollToSection(e, '#home')} className="text-2xl font-bold text-white tracking-tighter">
           محمدرضا <span className="text-brand-blue">باقری</span>
@@ -102,7 +102,7 @@ const NavbarFa = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full glass-panel py-6 px-6 flex flex-col gap-4 border-t border-gray-800">
+        <div className="md:hidden absolute top-full left-0 w-full bg-bg-darker/95 backdrop-blur-2xl py-6 px-6 flex flex-col gap-4 border-b border-gray-800 shadow-2xl">
           {navLinks.map((link) => (
             <a 
               key={link.name} 

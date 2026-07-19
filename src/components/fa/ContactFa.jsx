@@ -23,7 +23,7 @@ const ContactFa = () => {
           <motion.div 
             animate={{ y: [-8, 8, -8] }} 
             transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-            className="relative hidden md:block w-48 h-48 lg:w-64 lg:h-64 shrink-0 z-10 pointer-events-none"
+            className="relative w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 shrink-0 z-10 pointer-events-none mb-6 lg:mb-0"
           >
             <div className="w-full h-full drop-shadow-[0_15px_35px_rgba(0,255,102,0.35)] transform -scale-x-100">
               <img src="/avatar_contact-removebg-preview.png" alt="Avatar Contact" className="w-full h-full object-contain drop-shadow-lg" />

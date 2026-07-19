@@ -167,9 +167,9 @@ const RoleTabsFa = () => {
           <motion.div 
             animate={{ y: [-8, 8, -8] }} 
             transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-            className="absolute -top-24 left-0 md:-left-8 hidden lg:block z-20 pointer-events-none"
+            className="absolute -top-20 -left-2 md:-top-24 md:-left-8 z-20 pointer-events-none w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64"
           >
-            <div className="w-48 h-48 md:w-64 md:h-64 drop-shadow-[0_15px_35px_rgba(0,240,255,0.35)] transform -scale-x-100">
+            <div className="w-full h-full drop-shadow-[0_15px_35px_rgba(0,240,255,0.35)] transform -scale-x-100">
               <img src="/avatar_pointing-removebg-preview.png" alt="Avatar Pointing Down" className="w-full h-full object-contain drop-shadow-lg" />
             </div>
             <motion.div 

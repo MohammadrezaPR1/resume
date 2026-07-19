@@ -125,7 +125,7 @@ const RoleTabs = () => {
   const activeData = rolesData.find(r => r.id === activeTab);
 
   return (
-    <section id="roles" className="py-20 px-6 relative">
+    <section id="roles" className="py-20 px-6 relative overflow-x-hidden">
       <div className="absolute left-0 top-1/2 w-96 h-96 bg-brand-blue/5 rounded-full blur-[120px] -translate-y-1/2 pointer-events-none" />
       
       <div className="max-w-6xl mx-auto relative z-10">
@@ -168,9 +168,9 @@ const RoleTabs = () => {
           <motion.div 
             animate={{ y: [-8, 8, -8] }} 
             transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-            className="absolute -top-24 right-0 md:-right-8 hidden lg:block z-20 pointer-events-none"
+            className="absolute -top-20 -right-2 md:-top-24 md:-right-8 z-20 pointer-events-none w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64"
           >
-            <div className="w-48 h-48 md:w-64 md:h-64 drop-shadow-[0_15px_35px_rgba(0,240,255,0.35)]">
+            <div className="w-full h-full drop-shadow-[0_15px_35px_rgba(0,240,255,0.35)]">
               <img src="/avatar_pointing-removebg-preview.png" alt="Avatar Pointing Down" className="w-full h-full object-contain drop-shadow-lg" />
             </div>
             <motion.div 

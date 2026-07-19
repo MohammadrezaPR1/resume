@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -102,20 +103,47 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Nav */}
-      {mobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-bg-darker/95 backdrop-blur-2xl border-b border-gray-800 shadow-2xl p-4 flex flex-col gap-4">
-          {navLinks.map((link) => (
-            <a 
-              key={link.name} 
-              href={link.href} 
-              onClick={(e) => handleScrollToSection(e, link.href)}
-              className="text-base font-medium text-gray-300 hover:text-white p-2 rounded-lg hover:bg-white/5 transition-colors"
-            >
-              {link.name}
-            </a>
-          ))}
-        </div>
-      )}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="md:hidden absolute top-full left-0 right-0 bg-bg-darker/98 backdrop-blur-3xl px-6 flex flex-col border-b border-gray-800 shadow-2xl overflow-hidden"
+          >
+            <div className="py-6 flex flex-col gap-2">
+              {navLinks.map((link, i) => (
+                <motion.a 
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 + i * 0.1 }}
+                  key={link.name} 
+                  href={link.href} 
+                  onClick={(e) => handleScrollToSection(e, link.href)}
+                  className="text-lg font-medium text-gray-300 hover:text-white hover:bg-white/5 p-3 rounded-xl transition-all duration-300 flex items-center gap-3 group"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-brand-blue/40 group-hover:bg-brand-blue group-hover:scale-150 transition-all duration-300"></span>
+                  {link.name}
+                </motion.a>
+              ))}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="flex flex-col gap-4 mt-4 pt-6 border-t border-gray-800/50"
+              >
+                <Link to="/fa" className="text-center px-5 py-3.5 rounded-xl border border-gray-600/50 text-gray-300 hover:border-brand-blue hover:text-brand-blue hover:bg-brand-blue/5 transition-all duration-300 font-medium">
+                  Change Language (FA)
+                </Link>
+                <a href="#contact" onClick={(e) => handleScrollToSection(e, '#contact')} className="text-center px-5 py-3.5 rounded-xl bg-gradient-to-r from-brand-blue/10 to-brand-green/10 border border-brand-blue/30 text-brand-blue font-bold hover:from-brand-blue hover:to-brand-green hover:text-bg-dark transition-all duration-500 shadow-lg hover:shadow-[0_0_20px_rgba(0,240,255,0.3)]">
+                  Hire Me
+                </a>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

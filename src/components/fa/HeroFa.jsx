@@ -59,7 +59,7 @@ const HeroFa = () => {
           <div className="relative w-72 h-72 md:w-96 md:h-96 mx-auto">
             <div className="absolute inset-0 bg-gradient-to-tr from-brand-blue to-brand-green rounded-full blur-2xl opacity-40 animate-pulse" />
             <div className="absolute inset-2 bg-bg-darker rounded-full border border-gray-800 flex items-center justify-center overflow-hidden z-10 p-2">
-               <img src="/avatar.png" alt="Avatar" className="w-full h-full object-cover rounded-full" />
+               <img src="/avatar.png" alt="Avatar" fetchpriority="high" className="w-full h-full object-cover rounded-full" />
             </div>
             
             {/* Floating Badges */}

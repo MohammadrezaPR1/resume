@@ -112,11 +112,8 @@ const NavbarFa = () => {
             className="md:hidden absolute top-full left-0 w-full bg-bg-darker/98 backdrop-blur-3xl px-6 flex flex-col border-b border-gray-800 shadow-2xl overflow-hidden"
           >
             <div className="py-6 flex flex-col gap-2">
-              {navLinks.map((link, i) => (
-                <motion.a 
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 + i * 0.1 }}
+              {navLinks.map((link) => (
+                <a 
                   key={link.name} 
                   href={link.href} 
                   className="text-lg font-medium text-gray-300 hover:text-white hover:bg-white/5 p-3 rounded-xl transition-all duration-300 flex items-center gap-3 group"
@@ -124,12 +121,9 @@ const NavbarFa = () => {
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-brand-blue/40 group-hover:bg-brand-blue group-hover:scale-150 transition-all duration-300"></span>
                   {link.name}
-                </motion.a>
+                </a>
               ))}
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
+              <div 
                 className="flex flex-col gap-4 mt-4 pt-6 border-t border-gray-800/50"
               >
                 <Link to="/" className="text-center px-5 py-3.5 rounded-xl border border-gray-600/50 text-gray-300 hover:border-brand-blue hover:text-brand-blue hover:bg-brand-blue/5 transition-all duration-300 font-medium">
@@ -138,7 +132,7 @@ const NavbarFa = () => {
                 <a href="#contact" onClick={(e) => handleScrollToSection(e, '#contact')} className="text-center px-5 py-3.5 rounded-xl bg-gradient-to-r from-brand-blue/10 to-brand-green/10 border border-brand-blue/30 text-brand-blue font-bold hover:from-brand-blue hover:to-brand-green hover:text-bg-dark transition-all duration-500 shadow-lg hover:shadow-[0_0_20px_rgba(0,240,255,0.3)]">
                   ارتباط با من
                 </a>
-              </motion.div>
+              </div>
             </div>
           </motion.div>
         )}

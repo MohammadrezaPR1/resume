@@ -1,7 +1,143 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Brain, Server, Layout, Code } from 'lucide-react';
-import { FaGithub } from 'react-icons/fa';
+import { Brain, Server, Layout, Code, ChevronRight, ChevronLeft, X } from 'lucide-react';
+
+const ProjectSlider = ({ images }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const nextSlide = (e) => {
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevSlide = (e) => {
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  return (
+    <>
+      <div 
+        className="relative w-full h-48 md:h-56 overflow-hidden rounded-t-xl group/slider border-b border-gray-800/60 shrink-0 cursor-pointer"
+        onClick={() => setIsModalOpen(true)}
+      >
+        <AnimatePresence initial={false}>
+          <motion.img
+            key={currentIndex}
+            src={images[currentIndex]}
+            alt="Project View"
+            loading="lazy"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="absolute inset-0 w-full h-full object-cover group-hover/slider:scale-105 transition-transform duration-500"
+          />
+        </AnimatePresence>
+        
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-80" />
+        
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/slider:opacity-100 transition-opacity duration-300 pointer-events-none">
+          <div className="bg-black/50 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium border border-white/10">
+            View Images
+          </div>
+        </div>
+
+        {images.length > 1 && (
+          <>
+            <button 
+              onClick={prevSlide}
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 text-white p-1.5 rounded-full backdrop-blur-md opacity-0 group-hover/slider:opacity-100 transition-opacity hover:bg-brand-blue z-10"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <button 
+              onClick={nextSlide}
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 text-white p-1.5 rounded-full backdrop-blur-md opacity-0 group-hover/slider:opacity-100 transition-opacity hover:bg-brand-blue z-10"
+            >
+              <ChevronRight size={20} />
+            </button>
+            
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+              {images.map((_, idx) => (
+                <div 
+                  key={idx} 
+                  className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-4 bg-brand-blue' : 'w-1.5 bg-white/50'}`} 
+                />
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 md:p-8 backdrop-blur-md"
+            onClick={() => setIsModalOpen(false)}
+          >
+            <button 
+              className="absolute top-4 right-4 md:top-8 md:right-8 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors z-[110]"
+              onClick={() => setIsModalOpen(false)}
+            >
+              <X size={28} />
+            </button>
+
+            <div 
+              className="relative w-full max-w-5xl aspect-[16/10] md:aspect-video rounded-xl overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <AnimatePresence initial={false}>
+                <motion.img
+                  key={currentIndex}
+                  src={images[currentIndex]}
+                  alt="Project Full View"
+                  loading="lazy"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
+                  className="absolute inset-0 w-full h-full object-contain"
+                />
+              </AnimatePresence>
+              
+              {images.length > 1 && (
+                <>
+                  <button 
+                    onClick={prevSlide}
+                    className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 md:p-3 rounded-full hover:bg-brand-blue transition-colors z-10 border border-white/10"
+                  >
+                    <ChevronLeft size={24} />
+                  </button>
+                  <button 
+                    onClick={nextSlide}
+                    className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 md:p-3 rounded-full hover:bg-brand-blue transition-colors z-10 border border-white/10"
+                  >
+                    <ChevronRight size={24} />
+                  </button>
+                  
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10 bg-black/30 px-4 py-2 rounded-full backdrop-blur-sm border border-white/10">
+                    {images.map((_, idx) => (
+                      <button 
+                        key={idx}
+                        onClick={() => setCurrentIndex(idx)}
+                        className={`h-2 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-6 bg-brand-blue' : 'w-2 bg-white/50 hover:bg-white/80'}`} 
+                      />
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
 
 const rolesData = [
   {
@@ -20,12 +156,28 @@ const rolesData = [
       {
         name: 'LLM & Intent Detection Chatbot',
         desc: 'Intelligent, context-aware chatbot powered by Large Language Models (LLMs), semantic search, and intent-based routing for intuitive interactions.',
-        tech: ['Python', 'LLMs', 'LangChain', 'PyTorch', 'Numpy']
+        tech: ['Python', 'LLMs', 'LangChain', 'PyTorch', 'Numpy'],
+        images: [
+          '/چت بات/attatchment.fhkQf2.png.jpeg',
+          '/چت بات/attatchment.flwnz8.png.jpeg',
+          '/چت بات/attatchment.g68UIY.png.jpeg',
+          '/چت بات/attatchment.9uppu5.png.jpeg',
+          '/چت بات/attatchment.A0qQgT.png.jpeg',
+          '/چت بات/attatchment.Ws6TAf.png.jpeg',
+          '/چت بات/attatchment.ckdmHM.png.jpeg',
+          '/چت بات/attatchment.wjKbYc.png.jpeg',
+          '/چت بات/attatchment.yh2ZPR.png.jpeg'
+        ]
       },
       {
         name: 'Autonomous Driving Vision',
         desc: 'Image processing pipeline for a self-driving car using Computer Vision to detect lanes, objects, and navigate environments.',
-        tech: ['Python', 'OpenCV', 'TensorFlow', 'CNNs', 'Keras']
+        tech: ['Python', 'OpenCV', 'TensorFlow', 'CNNs', 'Keras'],
+        images: [
+          '/خودروی خودران/2026-07-23_160448.png',
+          '/خودروی خودران/2026-07-23_160533.png',
+          '/خودروی خودران/2026-07-23_160549.png'
+        ]
       },
       {
         name: 'Customer Churn Analysis',
@@ -64,12 +216,31 @@ const rolesData = [
       {
         name: 'Online Shop (Kalastore)',
         desc: 'E-commerce backend featuring JWT authentication, relational database modeling, product CRUD operations, and file uploads.',
-        tech: ['Node.js', 'Express', 'Sequelize', 'MySQL', 'Bcrypt']
+        tech: ['Node.js', 'Express', 'Sequelize', 'MySQL', 'Bcrypt'],
+        images: [
+          '/پروؤه فروشگاه/2026-07-23_153547.png',
+          '/پروؤه فروشگاه/2026-07-23_153639.png',
+          '/پروؤه فروشگاه/2026-07-23_153718.png',
+          '/پروؤه فروشگاه/2026-07-23_153737.png',
+          '/پروؤه فروشگاه/2026-07-23_153753.png',
+          '/پروؤه فروشگاه/2026-07-23_153823.png',
+          '/پروؤه فروشگاه/2026-07-23_153842.png',
+          '/پروؤه فروشگاه/2026-07-23_153902.png',
+          '/پروؤه فروشگاه/2026-07-23_153926.png'
+        ]
       },
       {
         name: 'Movie Streaming Platform',
         desc: 'Backend for a movie streaming platform including secure authentication, file/video management, and database integration.',
-        tech: ['Node.js', 'Express', 'MySQL', 'JWT', 'Sequelize']
+        tech: ['Node.js', 'Express', 'MySQL', 'JWT', 'Sequelize'],
+        images: [
+          '/وب سایت  فیلم و  سریال/2026-07-23_123237.png',
+          '/وب سایت  فیلم و  سریال/2026-07-23_123328.png',
+          '/وب سایت  فیلم و  سریال/2026-07-23_123359.png',
+          '/وب سایت  فیلم و  سریال/2026-07-23_123507.png',
+          '/وب سایت  فیلم و  سریال/2026-07-23_123526.png',
+          '/وب سایت  فیلم و  سریال/2026-07-23_123601.png'
+        ]
       },
       {
         name: 'Chatbot Backend Service',
@@ -79,7 +250,20 @@ const rolesData = [
       {
         name: 'News Portal',
         desc: 'Backend system with multi-database support (MySQL, Postgres, SQLite), robust JWT auth, and automated email services for news articles.',
-        tech: ['Node.js', 'Express', 'Multi-DB', 'Nodemailer']
+        tech: ['Node.js', 'Express', 'Multi-DB', 'Nodemailer'],
+        images: [
+          '/پروژه  وب سایت خبری/2026-07-23_114920.png',
+          '/پروژه  وب سایت خبری/2026-07-23_114957.png',
+          '/پروژه  وب سایت خبری/2026-07-23_115019.png',
+          '/پروژه  وب سایت خبری/2026-07-23_115053.png',
+          '/پروژه  وب سایت خبری/2026-07-23_115156.png',
+          '/پروژه  وب سایت خبری/2026-07-23_115219.png',
+          '/پروژه  وب سایت خبری/2026-07-23_115246.png',
+          '/پروژه  وب سایت خبری/2026-07-23_115330.png',
+          '/پروژه  وب سایت خبری/2026-07-23_115514.png',
+          '/پروژه  وب سایت خبری/2026-07-23_115536.png',
+          '/پروژه  وب سایت خبری/2026-07-23_115556.png'
+        ]
       }
     ]
   },
@@ -98,17 +282,49 @@ const rolesData = [
       {
         name: 'Online Shop Web (KalaStore)',
         desc: 'Modern e-commerce frontend featuring dynamic product rendering, cart management, and responsive design.',
-        tech: ['React', 'Vite', 'Tailwind CSS', 'React Router']
+        tech: ['React', 'Vite', 'Tailwind CSS', 'React Router'],
+        images: [
+          '/پروؤه فروشگاه/2026-07-23_153547.png',
+          '/پروؤه فروشگاه/2026-07-23_153639.png',
+          '/پروؤه فروشگاه/2026-07-23_153718.png',
+          '/پروؤه فروشگاه/2026-07-23_153737.png',
+          '/پروؤه فروشگاه/2026-07-23_153753.png',
+          '/پروؤه فروشگاه/2026-07-23_153823.png',
+          '/پروؤه فروشگاه/2026-07-23_153842.png',
+          '/پروؤه فروشگاه/2026-07-23_153902.png',
+          '/پروؤه فروشگاه/2026-07-23_153926.png'
+        ]
       },
       {
         name: 'Movie Stream Platform',
         desc: 'Interactive movie streaming UI with smooth animations, video handling, and robust state management.',
-        tech: ['React', 'Vite', 'Tailwind CSS', 'Framer Motion', 'Swiper']
+        tech: ['React', 'Vite', 'Tailwind CSS', 'Framer Motion', 'Swiper'],
+        images: [
+          '/وب سایت  فیلم و  سریال/2026-07-23_123237.png',
+          '/وب سایت  فیلم و  سریال/2026-07-23_123328.png',
+          '/وب سایت  فیلم و  سریال/2026-07-23_123359.png',
+          '/وب سایت  فیلم و  سریال/2026-07-23_123507.png',
+          '/وب سایت  فیلم و  سریال/2026-07-23_123526.png',
+          '/وب سایت  فیلم و  سریال/2026-07-23_123601.png'
+        ]
       },
       {
         name: 'News Website Frontend',
         desc: 'Dynamic news portal with rich text editing, skeleton loading, and smooth page transitions.',
-        tech: ['React', 'Framer Motion', 'React Quill', 'Tailwind CSS']
+        tech: ['React', 'Framer Motion', 'React Quill', 'Tailwind CSS'],
+        images: [
+          '/پروژه  وب سایت خبری/2026-07-23_114920.png',
+          '/پروژه  وب سایت خبری/2026-07-23_114957.png',
+          '/پروژه  وب سایت خبری/2026-07-23_115019.png',
+          '/پروژه  وب سایت خبری/2026-07-23_115053.png',
+          '/پروژه  وب سایت خبری/2026-07-23_115156.png',
+          '/پروژه  وب سایت خبری/2026-07-23_115219.png',
+          '/پروژه  وب سایت خبری/2026-07-23_115246.png',
+          '/پروژه  وب سایت خبری/2026-07-23_115330.png',
+          '/پروژه  وب سایت خبری/2026-07-23_115514.png',
+          '/پروژه  وب سایت خبری/2026-07-23_115536.png',
+          '/پروژه  وب سایت خبری/2026-07-23_115556.png'
+        ]
       },
       {
         name: 'Persian PWA Planner',
@@ -171,7 +387,7 @@ const RoleTabs = () => {
             className="absolute -top-20 -right-2 md:-top-24 md:-right-8 z-20 pointer-events-none w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64"
           >
             <div className="w-full h-full drop-shadow-[0_15px_35px_rgba(0,240,255,0.35)]">
-              <img src="/avatar_pointing-removebg-preview.png" alt="Avatar Pointing Down" className="w-full h-full object-contain drop-shadow-lg" />
+              <img src="/avatar_pointing-removebg-preview.png" alt="Avatar Pointing Down" loading="lazy" className="w-full h-full object-contain drop-shadow-lg" />
             </div>
             <motion.div 
               initial={{ opacity: 0, scale: 0.8 }}
@@ -226,21 +442,26 @@ const RoleTabs = () => {
                         whileHover={{ y: -5, scale: 1.02 }}
                         transition={{ type: "spring", stiffness: 300 }}
                         key={i} 
-                        className="bg-bg-dark border border-gray-800 rounded-xl p-6 hover:border-brand-blue/40 transition-colors group relative flex flex-col h-full shadow-lg hover:shadow-[0_0_30px_rgba(0,240,255,0.1)] clickable"
+                        className="bg-bg-dark border border-gray-800 rounded-xl hover:border-brand-blue/40 transition-colors group relative flex flex-col h-full shadow-lg hover:shadow-[0_0_30px_rgba(0,240,255,0.1)] clickable"
                       >
-                        <div className="flex justify-between items-start mb-3">
-                          <h5 className="text-xl font-bold text-white flex items-center gap-2">
-                             <Code size={18} className={`text-${activeData.color}`} />
-                             {project.name}
-                          </h5>
-                        </div>
-                        <p className="text-gray-400 text-sm mb-6 flex-grow">{project.desc}</p>
-                        <div className="flex flex-wrap gap-2 mt-auto">
-                          {project.tech.map((tech, j) => (
-                            <span key={j} className="text-xs font-semibold text-gray-500 bg-bg-darker px-2 py-1 rounded">
-                              {tech}
-                            </span>
-                          ))}
+                        {project.images && project.images.length > 0 && (
+                          <ProjectSlider images={project.images} />
+                        )}
+                        <div className="p-6 flex flex-col flex-grow">
+                          <div className="flex justify-between items-start mb-3">
+                            <h5 className="text-xl font-bold text-white flex items-center gap-2">
+                               <Code size={18} className={`text-${activeData.color}`} />
+                               {project.name}
+                            </h5>
+                          </div>
+                          <p className="text-gray-400 text-sm mb-6 flex-grow">{project.desc}</p>
+                          <div className="flex flex-wrap gap-2 mt-auto">
+                            {project.tech.map((tech, j) => (
+                              <span key={j} className="text-xs font-semibold text-gray-500 bg-bg-darker px-2 py-1 rounded">
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
                         </div>
                       </motion.div>
                     ))}

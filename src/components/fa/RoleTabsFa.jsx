@@ -1,10 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Brain, Server, Layout, Code, ChevronRight, ChevronLeft, X } from 'lucide-react';
 
 const ProjectSlider = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isModalOpen]);
 
   const nextSlide = (e) => {
     e.stopPropagation();
@@ -71,26 +83,27 @@ const ProjectSlider = ({ images }) => {
         )}
       </div>
 
-      <AnimatePresence>
-        {isModalOpen && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 md:p-8 backdrop-blur-md"
-            onClick={() => setIsModalOpen(false)}
-          >
-            <button 
-              className="absolute top-4 right-4 md:top-8 md:right-8 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors z-[110]"
+      {typeof document !== 'undefined' && createPortal(
+        <AnimatePresence>
+          {isModalOpen && (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 md:p-8 backdrop-blur-md"
               onClick={() => setIsModalOpen(false)}
             >
-              <X size={28} />
-            </button>
+              <button 
+                className="absolute top-4 right-4 md:top-8 md:right-8 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors z-[110]"
+                onClick={() => setIsModalOpen(false)}
+              >
+                <X size={28} />
+              </button>
 
-            <div 
-              className="relative w-full max-w-5xl aspect-[16/10] md:aspect-video rounded-xl overflow-hidden"
-              onClick={(e) => e.stopPropagation()}
-            >
+              <div 
+                className="relative w-full h-[75vh] md:h-auto max-w-5xl md:aspect-video rounded-xl overflow-hidden"
+                onClick={(e) => e.stopPropagation()}
+              >
               <AnimatePresence initial={false}>
                 <motion.img
                   key={currentIndex}
@@ -133,8 +146,10 @@ const ProjectSlider = ({ images }) => {
               )}
             </div>
           </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </>
   );
 };

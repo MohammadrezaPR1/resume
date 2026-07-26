@@ -173,15 +173,18 @@ const rolesData = [
         desc: 'Intelligent, context-aware chatbot powered by Large Language Models (LLMs), semantic search, and intent-based routing for intuitive interactions.',
         tech: ['Python', 'LLMs', 'LangChain', 'PyTorch', 'Numpy'],
         images: [
+          '/چت بات/attatchment.g68UIY.png.jpeg',
+          '/چت بات/attatchment.A0qQgT.png.jpeg',
+          '/چت بات/attatchment.wjKbYc.png.jpeg',
+          '/چت بات/attatchment.hNseiC.png.jpeg',
+          '/چت بات/attatchment.N8f4FE.png.jpeg',
+          '/چت بات/attatchment.QDQwIn.png (1).jpeg',
+          '/چت بات/attatchment.QDQwIn.png.jpeg',
+          '/چت بات/attatchment.ckdmHM.png.jpeg',
           '/چت بات/attatchment.fhkQf2.png.jpeg',
           '/چت بات/attatchment.flwnz8.png.jpeg',
-          '/چت بات/attatchment.g68UIY.png.jpeg',
-          '/چت بات/attatchment.9uppu5.png.jpeg',
-          '/چت بات/attatchment.A0qQgT.png.jpeg',
           '/چت بات/attatchment.Ws6TAf.png.jpeg',
-          '/چت بات/attatchment.ckdmHM.png.jpeg',
-          '/چت بات/attatchment.wjKbYc.png.jpeg',
-          '/چت بات/attatchment.yh2ZPR.png.jpeg'
+          '/چت بات/afd923ba-e43b-43fb-a019-b7e8a6ffcea9.jpg'
         ]
       },
       {
@@ -233,7 +236,6 @@ const rolesData = [
         desc: 'E-commerce backend featuring JWT authentication, relational database modeling, product CRUD operations, and file uploads.',
         tech: ['Node.js', 'Express', 'Sequelize', 'MySQL', 'Bcrypt'],
         images: [
-          '/پروؤه فروشگاه/2026-07-23_153547.png',
           '/پروؤه فروشگاه/2026-07-23_153639.png',
           '/پروؤه فروشگاه/2026-07-23_153718.png',
           '/پروؤه فروشگاه/2026-07-23_153737.png',
@@ -241,7 +243,12 @@ const rolesData = [
           '/پروؤه فروشگاه/2026-07-23_153823.png',
           '/پروؤه فروشگاه/2026-07-23_153842.png',
           '/پروؤه فروشگاه/2026-07-23_153902.png',
-          '/پروؤه فروشگاه/2026-07-23_153926.png'
+          '/پروؤه فروشگاه/2026-07-23_153926.png',
+          '/پروؤه فروشگاه/2026-07-23_153547.png',
+          '/پروؤه فروشگاه/2026-07-26_095727.png',
+          '/پروؤه فروشگاه/2026-07-26_100131.png',
+          '/پروؤه فروشگاه/2026-07-26_100231.png',
+          '/پروؤه فروشگاه/2026-07-26_100931.png'
         ]
       },
       {
@@ -277,7 +284,15 @@ const rolesData = [
           '/پروژه  وب سایت خبری/2026-07-23_115330.png',
           '/پروژه  وب سایت خبری/2026-07-23_115514.png',
           '/پروژه  وب سایت خبری/2026-07-23_115536.png',
-          '/پروژه  وب سایت خبری/2026-07-23_115556.png'
+          '/پروژه  وب سایت خبری/2026-07-23_115556.png',
+          '/پروژه  وب سایت خبری/2026-07-26_101449.png',
+          '/پروژه  وب سایت خبری/2026-07-26_101532.png',
+          '/پروژه  وب سایت خبری/2026-07-26_101600.png',
+          '/پروژه  وب سایت خبری/2026-07-26_101622.png',
+          '/پروژه  وب سایت خبری/2026-07-26_101731.png',
+          '/پروژه  وب سایت خبری/2026-07-26_101801.png',
+          '/پروژه  وب سایت خبری/2026-07-26_101821.png',
+          '/پروژه  وب سایت خبری/2026-07-26_101905.png'
         ]
       }
     ]
@@ -299,7 +314,6 @@ const rolesData = [
         desc: 'Modern e-commerce frontend featuring dynamic product rendering, cart management, and responsive design.',
         tech: ['React', 'Vite', 'Tailwind CSS', 'React Router'],
         images: [
-          '/پروؤه فروشگاه/2026-07-23_153547.png',
           '/پروؤه فروشگاه/2026-07-23_153639.png',
           '/پروؤه فروشگاه/2026-07-23_153718.png',
           '/پروؤه فروشگاه/2026-07-23_153737.png',
@@ -307,7 +321,12 @@ const rolesData = [
           '/پروؤه فروشگاه/2026-07-23_153823.png',
           '/پروؤه فروشگاه/2026-07-23_153842.png',
           '/پروؤه فروشگاه/2026-07-23_153902.png',
-          '/پروؤه فروشگاه/2026-07-23_153926.png'
+          '/پروؤه فروشگاه/2026-07-23_153926.png',
+          '/پروؤه فروشگاه/2026-07-23_153547.png',
+          '/پروؤه فروشگاه/2026-07-26_095727.png',
+          '/پروؤه فروشگاه/2026-07-26_100131.png',
+          '/پروؤه فروشگاه/2026-07-26_100231.png',
+          '/پروؤه فروشگاه/2026-07-26_100931.png'
         ]
       },
       {
@@ -338,7 +357,15 @@ const rolesData = [
           '/پروژه  وب سایت خبری/2026-07-23_115330.png',
           '/پروژه  وب سایت خبری/2026-07-23_115514.png',
           '/پروژه  وب سایت خبری/2026-07-23_115536.png',
-          '/پروژه  وب سایت خبری/2026-07-23_115556.png'
+          '/پروژه  وب سایت خبری/2026-07-23_115556.png',
+          '/پروژه  وب سایت خبری/2026-07-26_101449.png',
+          '/پروژه  وب سایت خبری/2026-07-26_101532.png',
+          '/پروژه  وب سایت خبری/2026-07-26_101600.png',
+          '/پروژه  وب سایت خبری/2026-07-26_101622.png',
+          '/پروژه  وب سایت خبری/2026-07-26_101731.png',
+          '/پروژه  وب سایت خبری/2026-07-26_101801.png',
+          '/پروژه  وب سایت خبری/2026-07-26_101821.png',
+          '/پروژه  وب سایت خبری/2026-07-26_101905.png'
         ]
       },
       {

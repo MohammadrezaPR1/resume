@@ -378,17 +378,23 @@ const rolesData = [
 ];
 
 const RoleTabsFa = () => {
-  const [activeTab, setActiveTab] = useState(rolesData[0].id);
-
-  const activeData = rolesData.find(r => r.id === activeTab);
-
   return (
     <section id="roles" className="py-20 px-6 relative overflow-x-hidden">
       <div className="absolute right-0 top-1/2 w-96 h-96 bg-brand-blue/5 rounded-full blur-[120px] -translate-y-1/2 pointer-events-none" />
       
       <div className="max-w-6xl mx-auto relative z-10">
         
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 relative">
+          <motion.div 
+            animate={{ y: [-8, 8, -8] }} 
+            transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+            className="absolute -top-16 left-0 md:-top-16 md:-left-8 z-20 pointer-events-none w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40"
+          >
+            <div className="w-full h-full drop-shadow-[0_15px_35px_rgba(0,240,255,0.35)] transform -scale-x-100">
+              <img src="/avatar_pointing-removebg-preview.png" alt="Avatar Pointing Down" loading="lazy" className="w-full h-full object-contain drop-shadow-lg" />
+            </div>
+          </motion.div>
+
           <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white">
             مجموعه <span className="text-gradient">مهارت‌های تخصصی من</span>
           </h2>
@@ -397,122 +403,105 @@ const RoleTabsFa = () => {
           </p>
         </div>
 
-        {/* Tab Headers */}
-        <div className="flex flex-col md:flex-row gap-4 justify-center mb-12 relative z-20">
-          {rolesData.map((role) => {
-            const isActive = activeTab === role.id;
+        <div className="relative flex flex-col gap-24 mt-16">
+          {rolesData.map((data, index) => {
+            const hexColor = data.color === 'purple-400' ? '#c084fc' : (data.color === 'brand-green' ? '#10b981' : '#00f0ff');
             return (
-              <button
-                key={role.id}
-                onClick={() => setActiveTab(role.id)}
-                className={`flex items-center justify-center gap-3 px-6 py-4 rounded-xl font-semibold transition-all duration-300 ${
-                  isActive 
-                    ? `bg-bg-dark border border-${role.color}/50 shadow-[0_0_20px_rgba(0,240,255,0.15)] text-white scale-105` 
-                    : `bg-transparent border border-gray-800 text-gray-400 hover:border-gray-600 hover:text-gray-200`
-                }`}
-              >
-                <span className={isActive ? `text-${role.color}` : ''}>
-                  {role.icon}
-                </span>
-                {role.title}
-              </button>
+              <div key={data.id} className="relative">
+                
+                {/* Attractive Separator */}
+                {index > 0 && (
+                  <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-full md:w-3/4 flex items-center justify-center">
+                    <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
+                    <div className="absolute w-16 h-1 rounded-full shadow-[0_0_15px_currentColor]" style={{ backgroundColor: hexColor, color: hexColor }} />
+                  </div>
+                )}
+
+                <motion.div
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.6 }}
+                  className="glass-panel p-8 md:p-12 relative z-10 backdrop-blur-xl bg-bg-darker/60 rounded-3xl border-t-4 overflow-hidden shadow-2xl"
+                  style={{ borderTopColor: hexColor }}
+                >
+                  
+                  {/* Background Glow */}
+                  <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none opacity-20" style={{ backgroundColor: hexColor }} />
+
+                  <div className="mb-10 relative z-10 flex flex-col md:flex-row items-center md:items-start gap-6 text-center md:text-right">
+                    <div className="p-4 rounded-2xl bg-bg-dark border border-gray-700/50 shadow-[0_0_20px_rgba(0,0,0,0.2)] shrink-0" style={{ color: hexColor }}>
+                      {data.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-3xl font-bold text-white mb-4">
+                        {data.title}
+                      </h3>
+                      <p className="text-gray-400 text-lg max-w-3xl leading-relaxed text-justify">
+                        {data.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="mb-12 relative z-10">
+                    <h4 className="text-xl font-bold text-white mb-6 border-b border-gray-800 pb-2 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full" style={{ backgroundColor: hexColor }}></span>
+                      تکنولوژی‌ها و مهارت‌ها
+                    </h4>
+                    <div className="flex flex-wrap gap-3">
+                      {data.skills.map((skill, i) => (
+                        <span 
+                          key={i} 
+                          className="px-4 py-2 bg-bg-darker border border-gray-700/50 rounded-lg text-sm font-medium text-gray-300 hover:text-white transition-colors cursor-default hover:shadow-[0_0_10px_rgba(255,255,255,0.1)]"
+                          dir="ltr"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="relative z-10">
+                    <h4 className="text-xl font-bold text-white mb-6 border-b border-gray-800 pb-2 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full" style={{ backgroundColor: hexColor }}></span>
+                      پروژه‌های کلیدی
+                    </h4>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                      {data.projects.map((project, i) => (
+                        <motion.div 
+                          whileHover={{ y: -5, scale: 1.02 }}
+                          transition={{ type: "spring", stiffness: 300 }}
+                          key={i} 
+                          className="bg-bg-dark border border-gray-800 rounded-xl transition-colors group relative flex flex-col h-full shadow-lg clickable hover:border-opacity-50"
+                          style={{ '--hover-border-color': hexColor }}
+                        >
+                          {project.images && project.images.length > 0 && (
+                            <ProjectSlider images={project.images} />
+                          )}
+                          <div className="p-6 flex flex-col flex-grow">
+                            <div className="flex justify-between items-start mb-3">
+                              <h5 className="text-xl font-bold text-white flex items-center gap-2">
+                                 <Code size={18} style={{ color: hexColor }} />
+                                 {project.name}
+                              </h5>
+                            </div>
+                            <p className="text-gray-400 text-sm mb-6 flex-grow leading-relaxed text-justify">{project.desc}</p>
+                            <div className="flex flex-wrap gap-2 mt-auto justify-end">
+                              {project.tech.map((tech, j) => (
+                                <span key={j} className="text-xs font-semibold text-gray-500 bg-bg-darker px-2 py-1 rounded" dir="ltr">
+                                  {tech}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
             );
           })}
-        </div>
-
-        {/* Tab Content Wrapper */}
-        <div className="relative mt-16">
-          
-          <motion.div 
-            animate={{ y: [-8, 8, -8] }} 
-            transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-            className="absolute -top-20 -left-2 md:-top-24 md:-left-8 z-20 pointer-events-none w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64"
-          >
-            <div className="w-full h-full drop-shadow-[0_15px_35px_rgba(0,240,255,0.35)] transform -scale-x-100">
-              <img src="/avatar_pointing-removebg-preview.png" alt="Avatar Pointing Down" loading="lazy" className="w-full h-full object-contain drop-shadow-lg" />
-            </div>
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 }}
-              className="absolute -top-6 right-8 glass-panel px-5 py-3 rounded-2xl rounded-br-none text-sm font-medium text-white shadow-[0_10px_25px_rgba(0,240,255,0.2)] whitespace-nowrap border-brand-blue/20 hidden md:block"
-            >
-              حتماً این بخش رو ببینید! 👇
-            </motion.div>
-          </motion.div>
-
-          <div className="glass-panel p-8 md:p-12 min-h-[500px] relative z-10 backdrop-blur-xl bg-bg-darker/60">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeData.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="mb-10">
-                  <h3 className="text-3xl font-bold text-white mb-4 flex items-center gap-4">
-                    <span className={`p-3 rounded-xl bg-${activeData.color}/10 text-${activeData.color}`}>
-                      {activeData.icon}
-                    </span>
-                    {activeData.title}
-                  </h3>
-                  <p className="text-gray-400 text-lg max-w-3xl leading-relaxed text-justify">
-                    {activeData.description}
-                  </p>
-                </div>
-
-                <div className="mb-12">
-                  <h4 className="text-xl font-bold text-white mb-6 border-b border-gray-800 pb-2">تکنولوژی‌ها و مهارت‌ها</h4>
-                  <div className="flex flex-wrap gap-3">
-                    {activeData.skills.map((skill, i) => (
-                      <span 
-                        key={i} 
-                        className="px-4 py-2 bg-bg-darker border border-gray-700/50 rounded-lg text-sm font-medium text-gray-300 hover:border-brand-blue hover:text-white transition-colors cursor-default"
-                        dir="ltr"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <h4 className="text-xl font-bold text-white mb-6 border-b border-gray-800 pb-2">پروژه‌های کلیدی</h4>
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {activeData.projects.map((project, i) => (
-                      <motion.div 
-                        whileHover={{ y: -5, scale: 1.02 }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                        key={i} 
-                        className="bg-bg-dark border border-gray-800 rounded-xl hover:border-brand-blue/40 transition-colors group relative flex flex-col h-full shadow-lg hover:shadow-[0_0_30px_rgba(0,240,255,0.1)] clickable"
-                      >
-                        {project.images && project.images.length > 0 && (
-                          <ProjectSlider images={project.images} />
-                        )}
-                        <div className="p-6 flex flex-col flex-grow">
-                          <div className="flex justify-between items-start mb-3">
-                            <h5 className="text-xl font-bold text-white flex items-center gap-2">
-                               <Code size={18} className={`text-${activeData.color}`} />
-                               {project.name}
-                            </h5>
-                          </div>
-                          <p className="text-gray-400 text-sm mb-6 flex-grow leading-relaxed text-justify">{project.desc}</p>
-                          <div className="flex flex-wrap gap-2 mt-auto justify-end">
-                            {project.tech.map((tech, j) => (
-                              <span key={j} className="text-xs font-semibold text-gray-500 bg-bg-darker px-2 py-1 rounded" dir="ltr">
-                                {tech}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
         </div>
       </div>
     </section>

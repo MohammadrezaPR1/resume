@@ -32,7 +32,7 @@ const Contact = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2 }}
-              className="absolute -top-4 -right-8 glass-panel px-5 py-3 rounded-2xl rounded-bl-none text-sm font-medium text-white shadow-[0_10px_25px_rgba(0,255,102,0.2)] whitespace-nowrap border-brand-green/20 pointer-events-auto"
+              className="absolute -top-4 right-0 sm:-right-8 glass-panel px-4 sm:px-5 py-2.5 sm:py-3 rounded-2xl rounded-bl-none text-xs sm:text-sm font-medium text-white shadow-[0_10px_25px_rgba(0,255,102,0.2)] whitespace-nowrap border-brand-green/20 pointer-events-auto"
             >
               Call me maybe? 🤙
             </motion.div>

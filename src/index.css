@@ -9,6 +9,12 @@
 }
 
 @layer base {
+  html, body, #root {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+    width: 100%;
+    position: relative;
+  }
   body {
     background-color: theme('color.bg-darker');
     color: theme('color.text-light');
@@ -31,5 +37,6 @@
   background-clip: text;
 }
 
-.font-vazir { font-family: 'Vazirmatn', sans-serif; }
-
+.font-vazir {
+  font-family: 'Vazirmatn', sans-serif;
+}

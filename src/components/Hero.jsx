@@ -63,28 +63,28 @@ const Hero = () => {
             <motion.div 
               animate={{ y: [-10, 10, -10] }} 
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-              className="absolute -top-4 -left-4 glass-panel p-3 rounded-2xl flex items-center gap-3 z-20"
+              className="absolute -top-4 left-0 sm:-left-4 glass-panel p-2.5 sm:p-3 rounded-2xl flex items-center gap-2 sm:gap-3 z-20"
             >
-              <div className="p-2 bg-brand-blue/20 rounded-lg text-brand-blue"><BrainCircuit size={24} /></div>
-              <span className="font-semibold text-sm text-white">AI / NLP</span>
+              <div className="p-1.5 sm:p-2 bg-brand-blue/20 rounded-lg text-brand-blue"><BrainCircuit size={20} className="sm:w-6 sm:h-6" /></div>
+              <span className="font-semibold text-xs sm:text-sm text-white">AI / NLP</span>
             </motion.div>
 
             <motion.div 
               animate={{ y: [10, -10, 10] }} 
               transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-              className="absolute top-1/2 -right-8 glass-panel p-3 rounded-2xl flex items-center gap-3 z-20"
+              className="absolute top-1/2 right-0 sm:-right-8 glass-panel p-2.5 sm:p-3 rounded-2xl flex items-center gap-2 sm:gap-3 z-20"
             >
-              <div className="p-2 bg-brand-green/20 rounded-lg text-brand-green"><Database size={24} /></div>
-              <span className="font-semibold text-sm text-white">Backend</span>
+              <div className="p-1.5 sm:p-2 bg-brand-green/20 rounded-lg text-brand-green"><Database size={20} className="sm:w-6 sm:h-6" /></div>
+              <span className="font-semibold text-xs sm:text-sm text-white">Backend</span>
             </motion.div>
 
             <motion.div 
               animate={{ y: [-8, 8, -8] }} 
               transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut" }}
-              className="absolute -bottom-4 left-10 glass-panel p-3 rounded-2xl flex items-center gap-3 z-20"
+              className="absolute -bottom-4 left-2 sm:left-10 glass-panel p-2.5 sm:p-3 rounded-2xl flex items-center gap-2 sm:gap-3 z-20"
             >
-              <div className="p-2 bg-purple-500/20 rounded-lg text-purple-400"><Terminal size={24} /></div>
-              <span className="font-semibold text-sm text-white">Frontend</span>
+              <div className="p-1.5 sm:p-2 bg-purple-500/20 rounded-lg text-purple-400"><Terminal size={20} className="sm:w-6 sm:h-6" /></div>
+              <span className="font-semibold text-xs sm:text-sm text-white">Frontend</span>
             </motion.div>
           </div>
         </motion.div>
